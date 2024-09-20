@@ -33,7 +33,7 @@ jobs:
       # Validate Terraform configuration
       - name: Validate Module syntax
         run: terraform validate
-        working-directory: ./tests
+        working-directory: ./
 
 
       # Initialize Terraform
