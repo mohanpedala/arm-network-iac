@@ -23,16 +23,24 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0 # Specify the version you want to use
+          terraform_version: 1.5.0
 
       # Run Terraform Format Check
       - name: Terraform Lint (Format Check)
         run: terraform fmt -check -recursive
+        working-directory: ./tests
+
+      # Validate Terraform configuration
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./tests
 
       # Initialize Terraform
-      - name: Terraform Init
+      - name: Terraform Init 
         run: terraform init
+        working-directory: ./tests
 
       # Run Terraform Plan
       - name: Terraform Plan
         run: terraform plan
+        working-directory: ./tests
