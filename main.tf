@@ -23,7 +23,7 @@ resource "aws_subnet" "subnet" {
   cidr_block = cidrsubnet(var.vpc_cidr_block, 4, count.index)
 
   availability_zone = data.aws_availability_zones.available.names[count.index]
-  tags = {
+  tags = merge(local.default_tags, var.tags, {
     Name = "subnet-${count.index + 1}"
-  }
+  })
 }
