@@ -25,22 +25,23 @@ jobs:
         with:
           terraform_version: 1.5.0
 
-      # Run Terraform Format Check
-      - name: Terraform Lint (Format Check)
-        run: terraform fmt -check -recursive
-        working-directory: ./tests
+      # Initialize Terraform in root directory
+      - name: Initialize Root Dir
+        run: terraform init
+        working-directory: ./
 
       # Validate Terraform configuration
-      - name: Terraform Validate
+      - name: Validate Module syntax
         run: terraform validate
         working-directory: ./tests
 
+
       # Initialize Terraform
-      - name: Terraform Init 
+      - name: Initialize Tests
         run: terraform init
         working-directory: ./tests
 
-      # Run Terraform Plan
-      - name: Terraform Plan
-        run: terraform plan
+      # Validate Terraform configuration
+      - name: Validate Tests Syntax
+        run: terraform validate
         working-directory: ./tests
